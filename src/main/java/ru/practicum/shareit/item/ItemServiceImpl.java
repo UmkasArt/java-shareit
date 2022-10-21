@@ -18,7 +18,7 @@ class ItemServiceImpl implements ItemService {
     @Override
     public Item addNewItem(Long userId, Item item) {
         if (userRepository.getUserById(userId) == null) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Не найден пользователь в хранилище пользователей с id " + userId);
         }
         item.setOwnerId(userId);
         return repository.save(item);
@@ -26,7 +26,6 @@ class ItemServiceImpl implements ItemService {
 
     @Override
     public Item updateItem(Long userId, ItemDto itemDto, Long itemId) {
-        //validateUser(userDto.toUser());
         return repository.updateItem(userId, itemDto, itemId);
     }
 

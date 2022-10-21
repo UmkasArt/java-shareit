@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ItemRepositoryImpl implements ItemRepository {
     private final Map<Long, List<Item>> items = new HashMap<>();
 
-    private static long generatorId = 0;
+    private long generatorId = 0;
 
     @Override
     public Item save(Item item) {
@@ -31,7 +31,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     public Item updateItem(long userId, ItemDto itemDto, long itemId) {
         Item updatedItem = null;
         if (items.get(userId) == null) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Не найден пользователь в item хранилище с id " + userId);
         }
         for (Item item : items.get(userId)) {
             if (item.getId() == itemId) {
@@ -39,7 +39,7 @@ public class ItemRepositoryImpl implements ItemRepository {
             }
         }
         if (updatedItem == null) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("У пользователя с id " + userId + " не найден item с id " + itemId);
         }
 
         if (itemDto.getName() != null) {

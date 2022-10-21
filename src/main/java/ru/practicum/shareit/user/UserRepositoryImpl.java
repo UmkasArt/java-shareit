@@ -10,7 +10,7 @@ import java.util.*;
 public class UserRepositoryImpl implements UserRepository {
     private final Map<Long, User> users = new HashMap<>();
 
-    private static long generatorId = 0;
+    private long generatorId = 0;
 
     @Override
     public List<User> findAll() {
