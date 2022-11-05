@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "3f4e7377-eec3-40dd-a9cb-ae696885394e",
+		"_postman_id": "90105ca9-370d-451a-bd51-e3481a3c2eab",
 		"name": "Sprint 15 ShareIt (add-bookings)",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "2036415"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -944,7 +943,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -995,7 +994,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -1046,7 +1045,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -2875,7 +2874,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -4052,7 +4051,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "3",
 								"type": "text"
 							},
 							{
@@ -5321,7 +5320,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking future create from user3 to item1",
+					"name": "Booking future create from user4 to item1",
 					"event": [
 						{
 							"listen": "test",
