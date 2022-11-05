@@ -7,6 +7,8 @@ import ru.practicum.shareit.user.model.User;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,20 +29,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long userId) {
-        return repository.getUserById(userId);
+        if (!repository.findById(userId).isPresent()) {
+            throw new NoSuchElementException("Пользователь не найден");
+        }
+        return repository.findById(userId).get();
     }
 
     @Override
     public void deleteUser(Long userId) {
-        repository.removeUser(userId);
+        repository.deleteById(userId);
     }
 
     @Override
     public User updateUser(@NotNull UserDto userDto, Long userId) {
         validateUser(userDto.toUser());
-        return repository.updateUser(userDto, userId);
+        Optional<User> user = repository.findById(userId);
+        if (userDto.getName() != null) {
+            user.get().setName(userDto.getName());
+        }
+        if (userDto.getEmail() != null) {
+            user.get().setEmail(userDto.getEmail());
+        }
+        return repository.save(user.get());
     }
-
 
     private void validateUser(@NotNull User user) {
         getAllUsers().stream().filter(userIter -> userIter.getEmail().equals(user.getEmail())).forEach(userIter -> {
