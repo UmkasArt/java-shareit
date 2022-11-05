@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,7 +54,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow();
         if (booking.getStatus() == BookingStatus.APPROVED)
             throw new ValidationException("Статус не может быть изменен");
-        if (booking.getBooker().getId() == userId) {
+        if (Objects.equals(booking.getBooker().getId(), userId)) {
             throw new NoSuchElementException("Букер не может изменить статус бронирования");
         }
         booking.setStatus(bookingStatus);
@@ -65,7 +66,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto getByUserIdAndBookingId(Long userId, Long bookingId) {
         userRepository.findById(userId).orElseThrow();
         Booking booking = bookingRepository.findById(bookingId).orElseThrow();
-        if (!(booking.getBooker().getId() == userId || booking.getItem().getOwnerId() == userId))
+        if (!(Objects.equals(booking.getBooker().getId(), userId) || Objects.equals(booking.getItem().getOwnerId(), userId)))
             throw new NoSuchElementException(String.format("User_id = %d и booking_id = %d не связаны", userId, bookingId));
         return BookingMapper.toDto(booking);
     }
