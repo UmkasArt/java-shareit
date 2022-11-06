@@ -24,4 +24,9 @@ public class ErrorHandler {
     public ResponseEntity<?> handleValidationException(final NoSuchElementException e) {
         return new ResponseEntity<>(new ErrorWrapper(e.getMessage()), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<?> handleRuntimeException(final RuntimeException e) {
+        return new ResponseEntity<>(new ErrorWrapper(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

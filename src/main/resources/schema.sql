@@ -54,3 +54,23 @@ create table if not exists comments
     constraint COMMENTS_PK
         primary key (id)
 );
+
+alter table if exists ITEMS
+    add constraint if not exists ITEMS_USERS_ID_FK
+        foreign key (OWNER_ID) references USERS(ID);
+
+alter table if exists COMMENTS
+    add constraint if not exists COMMENTS_ITEMS_ID_FK
+        foreign key (ITEM_ID) references ITEMS(ID);
+
+alter table if exists COMMENTS
+    add constraint if not exists COMMENTS_USERS_ID_FK
+        foreign key (AUTHOR_ID) references USERS(ID);
+
+alter table if exists BOOKINGS
+    add constraint if not exists BOOKINGS_ITEMS_ID_FK
+        foreign key (ITEM_ID) references ITEMS(ID);
+
+alter table if exists BOOKINGS
+    add constraint if not exists BOOKINGS_USERS_ID_FK
+        foreign key (BOOKER_ID) references USERS(ID);
