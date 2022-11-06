@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(@NotNull User user) {
-        validateUser(user);
         return repository.save(user);
     }
 
@@ -42,7 +41,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(@NotNull UserDto userDto, Long userId) {
-        validateUser(userDto.toUser());
         Optional<User> user = repository.findById(userId);
         if (userDto.getName() != null) {
             user.get().setName(userDto.getName());
