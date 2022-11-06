@@ -21,7 +21,7 @@ public class User {
     private Long id;
     @Column(name = "NAME")
     private String name;
-    @Column(name = "EMAIL", unique = true)
+    @Column(name = "EMAIL")
     @NotNull
     @NotBlank
     @Email

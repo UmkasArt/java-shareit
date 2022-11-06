@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "90105ca9-370d-451a-bd51-e3481a3c2eab",
+		"_postman_id": "3f4e7377-eec3-40dd-a9cb-ae696885394e",
 		"name": "Sprint 15 ShareIt (add-bookings)",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2036415"
 	},
 	"item": [
 		{
@@ -264,7 +265,7 @@
 									"});",
 									"pm.test(\"Test create user\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
+									"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);",
 									"    pm.expect(jsonData.email, '\"email\" field').to.eql('user@user.com');",
 									"    pm.expect(jsonData.name, '\"name\" field').to.eql('user');",
 									"});"
@@ -533,7 +534,7 @@
 									"});",
 									"pm.test(\"Test get user\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
+									"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);",
 									"    pm.expect(jsonData.email, '\"email\" field').to.eql('user@user.com');",
 									"    pm.expect(jsonData.name, '\"name\" field').to.eql('user');",
 									"});"
@@ -563,7 +564,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}
@@ -651,7 +652,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}
@@ -670,7 +671,7 @@
 									"});",
 									"pm.test(\"Test create user\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);",
+									"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);",
 									"    pm.expect(jsonData.email, '\"email\" field').to.eql('user@user.com');",
 									"    pm.expect(jsonData.name, '\"name\" field').to.eql('user');",
 									"});"
@@ -727,7 +728,7 @@
 									"    pm.expect(jsonData[0].email, 'result[0]: \"email\" field').to.eql('updateName@user.com');",
 									"    pm.expect(jsonData[0].name, 'result[0]: \"name\" field').to.eql('updateName');",
 									"",
-									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(3);",
+									"    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(4);",
 									"    pm.expect(jsonData[1].email, 'result[1]: \"email\" field').to.eql('user@user.com');",
 									"    pm.expect(jsonData[1].name, 'result[1]: \"name\" field').to.eql('user');",
 									"});"
@@ -943,7 +944,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -994,7 +995,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1045,7 +1046,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1217,7 +1218,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1528,7 +1529,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1577,7 +1578,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1633,7 +1634,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1691,7 +1692,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1771,7 +1772,7 @@
 					"response": []
 				},
 				{
-					"name": "Item get all user 3",
+					"name": "Item get all user 4",
 					"event": [
 						{
 							"listen": "test",
@@ -1804,7 +1805,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -1915,7 +1916,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -2092,7 +2093,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -2271,7 +2272,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -2402,7 +2403,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -2874,7 +2875,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -3086,7 +3087,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -3495,7 +3496,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -3555,7 +3556,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -3635,7 +3636,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -3687,7 +3688,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -3736,7 +3737,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -3776,7 +3777,7 @@
 									"});",
 									"pm.test(\"Test create other user\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);",
+									"    pm.expect(jsonData.id, '\"id\" field').to.eql(5);",
 									"    pm.expect(jsonData.email, '\"email\" field').to.eql('other@other.com');",
 									"    pm.expect(jsonData.name, '\"name\" field').to.eql('other');",
 									"});"
@@ -3836,7 +3837,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "5",
 								"type": "text"
 							},
 							{
@@ -3885,7 +3886,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "5",
 								"type": "text"
 							},
 							{
@@ -3996,7 +3997,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -4051,7 +4052,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -4152,7 +4153,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking create from user3 to item1",
+					"name": "Booking create from user4 to item1",
 					"event": [
 						{
 							"listen": "test",
@@ -4190,7 +4191,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -4234,7 +4235,7 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);",
 									"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(3);",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(4);",
 									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(1);",
 									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Аккумуляторная дрель');",
 									"});"
@@ -4283,7 +4284,7 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 get by user3 with  bookings",
+					"name": "Item 2 get by user4 with  bookings",
 					"event": [
 						{
 							"listen": "test",
@@ -4292,7 +4293,7 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
-									"pm.test(\"Item 2 get by user3 with  bookings\", function () {",
+									"pm.test(\"Item 2 get by user4 with  bookings\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);",
 									"    pm.expect(jsonData.name, '\"name\" field').to.eql('Отвертка');",
@@ -4325,7 +4326,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -4411,7 +4412,7 @@
 					"response": []
 				},
 				{
-					"name": "Item get all user 3 with bookings",
+					"name": "Item get all user 4 with bookings",
 					"event": [
 						{
 							"listen": "test",
@@ -4420,7 +4421,7 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
-									"pm.test(\"Test get all bookings for user (id = 3)\", function () {",
+									"pm.test(\"Test get all bookings for user (id = 4)\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.length, 'items count in total').to.eql(2);",
 									"    ",
@@ -4452,7 +4453,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -4657,7 +4658,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -4686,7 +4687,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking (id=3) set rejected by owner",
+					"name": "Booking (id=4) set rejected by owner",
 					"event": [
 						{
 							"listen": "test",
@@ -4713,7 +4714,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -4864,7 +4865,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -5045,7 +5046,7 @@
 							},
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							}
 						],
@@ -5259,7 +5260,7 @@
 					"response": []
 				},
 				{
-					"name": "Item 2 get  by user3  with comments",
+					"name": "Item 2 get  by user4  with comments",
 					"event": [
 						{
 							"listen": "test",
@@ -5291,7 +5292,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -5320,7 +5321,7 @@
 					"response": []
 				},
 				{
-					"name": "Booking future create from user4 to item1",
+					"name": "Booking future create from user5 to item1",
 					"event": [
 						{
 							"listen": "test",
@@ -5358,7 +5359,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "5",
 								"type": "text"
 							},
 							{
@@ -5402,7 +5403,7 @@
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.id, '\"id\" field').to.eql(5);",
 									"    pm.expect(jsonData.status, '\"status\" field').to.eql('APPROVED');",
-									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(3);",
+									"    pm.expect(jsonData.booker.id, '\"booker.id\" field').to.eql(5);",
 									"    pm.expect(jsonData.item.id, '\"item.id\" field').to.eql(1);",
 									"    pm.expect(jsonData.item.name, '\"item.name\" field').to.eql('Аккумуляторная дрель');",
 									"});"
@@ -5481,7 +5482,7 @@
 							},
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "4",
+								"value": "5",
 								"type": "text"
 							}
 						],
@@ -5624,7 +5625,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
@@ -5767,7 +5768,7 @@
 						"header": [
 							{
 								"key": "X-Sharer-User-Id",
-								"value": "3",
+								"value": "4",
 								"type": "text"
 							},
 							{
