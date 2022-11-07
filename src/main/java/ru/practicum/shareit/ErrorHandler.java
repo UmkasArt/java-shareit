@@ -1,8 +1,8 @@
 package ru.practicum.shareit;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ValidationException;
@@ -11,17 +11,22 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class ErrorHandler {
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public void handleIllegalArgumentException(final IllegalArgumentException e) {
+    public ResponseEntity<?> handleIllegalArgumentException(final IllegalArgumentException e) {
+        return new ResponseEntity<>(new ErrorWrapper(e.getMessage()), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleValidationException(final ValidationException e) {
+    public ResponseEntity<?> handleValidationException(final ValidationException e) {
+        return new ResponseEntity<>(new ErrorWrapper(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void handleValidationException(final NoSuchElementException e) {
+    public ResponseEntity<?> handleValidationException(final NoSuchElementException e) {
+        return new ResponseEntity<>(new ErrorWrapper(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<?> handleRuntimeException(final RuntimeException e) {
+        return new ResponseEntity<>(new ErrorWrapper(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
