@@ -50,10 +50,4 @@ public class UserServiceImpl implements UserService {
         }
         return repository.save(user.get());
     }
-
-    private void validateUser(@NotNull User user) {
-        getAllUsers().stream().filter(userIter -> userIter.getEmail().equals(user.getEmail())).forEach(userIter -> {
-            throw new IllegalArgumentException("Такой email уже существует");
-        });
-    }
 }

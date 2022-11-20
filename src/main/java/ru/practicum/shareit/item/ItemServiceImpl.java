@@ -13,6 +13,7 @@ import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.UserRepository;
 import ru.practicum.shareit.user.model.User;
 
+import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -88,6 +89,7 @@ class ItemServiceImpl implements ItemService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public void deleteItem(Long userId, Long itemId) {
         itemRepository.deleteByIdAndOwnerId(itemId, userId);
@@ -98,9 +100,9 @@ class ItemServiceImpl implements ItemService {
         User user = userRepository.findById(userId).orElseThrow();
         Item item = itemRepository.findById(itemId).orElseThrow();
         List<Booking> bookings = bookingRepository
-                .findAllByItemIdAndBooker_IdAndStatusAndEndIsBefore(itemId, userId, BookingStatus.APPROVED,LocalDateTime.now());
+                .findAllByItemIdAndBooker_IdAndStatusAndEndIsBefore(itemId, userId, BookingStatus.APPROVED, LocalDateTime.now());
         if (bookings.isEmpty())
-            throw new ValidationException("Item не забронирован этим пользователем");
+            throw new ValidationException("Item не забронирован этим пользователем или аренда вещи еще не завершена");
         Comment comment = CommentMapper.toModel(commentDto);
         comment.setAuthor(user);
         comment.setItem(item);

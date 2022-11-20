@@ -18,13 +18,13 @@ public class ItemController {
 
     @PostMapping
     public ItemDto add(@RequestHeader("X-Sharer-User-Id") Long userId,
-                    @Valid @RequestBody ItemDto itemDto) {
+                       @Valid @RequestBody ItemDto itemDto) {
         return itemService.addNewItem(userId, itemDto);
     }
 
     @PatchMapping("{itemId}")
     public ItemDto updateItem(@RequestHeader("X-Sharer-User-Id") Long userId,
-                           @RequestBody ItemDto itemDto, @PathVariable Long itemId) {
+                              @RequestBody ItemDto itemDto, @PathVariable Long itemId) {
         itemDto.setId(itemId);
         return itemService.updateItem(userId, itemDto, itemId);
     }
@@ -42,7 +42,7 @@ public class ItemController {
 
     @GetMapping("/search")
     public List<ItemDto> getSearchedItems(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                       @RequestParam String text) {
+                                          @RequestParam String text) {
         return itemService.getSearchedItems(text);
     }
 

@@ -16,6 +16,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     void deleteByIdAndOwnerId(Long id, Long ownerId);
 
+    List<Item> findAllByRequestId(Long requestId);
+
     @Query(value = "SELECT * FROM ITEMS i " +
             "WHERE i.IS_AVAILABLE = true AND (LOWER(i.NAME) LIKE LOWER(CONCAT('%', ?1,'%')) " +
             "OR LOWER(i.DESCRIPTION) LIKE LOWER(CONCAT('%', ?1,'%')))", nativeQuery = true)

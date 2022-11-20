@@ -6,6 +6,7 @@ import ru.practicum.shareit.booking.dto.BookingDtoWithId;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,7 @@ public class ItemDto {
     private Long requestId;
     private BookingDtoWithId lastBooking;
     private BookingDtoWithId nextBooking;
-    private List<CommentDto> comments;
+    private List<CommentDto> comments = new ArrayList<>();
 
     @JsonCreator
     public ItemDto(Long id, String name, String description, Boolean available, Long ownerId, Long requestId) {
