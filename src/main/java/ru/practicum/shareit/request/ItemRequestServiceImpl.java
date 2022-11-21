@@ -52,7 +52,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("Невозможно найти запросы пользователя - " +
                         "не найден пользователь с id " + userId));
-        List<ItemRequestDto> itemRequestDtos = itemRequestRepository.findAllByRequestorIdOrderByCreatedAsc(userId, PageRequest.of(from/size, size))
+        List<ItemRequestDto> itemRequestDtos = itemRequestRepository.findAllByRequestorIdOrderByCreatedAsc(userId, PageRequest.of(from / size, size))
                 .stream()
                 .map(ItemRequestMapper::toItemRequestDto)
                 .collect(Collectors.toList());
@@ -74,7 +74,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
                 .orElseThrow(() -> new NoSuchElementException("Невозможно найти запросы - " +
                         "не найден пользователь с id " + userId));
         List<ItemRequestDto> itemRequestDtos = itemRequestRepository.findAllByRequestorNotLikeOrderByCreatedAsc(user,
-                        PageRequest.of(from/size, size))
+                        PageRequest.of(from / size, size))
                 .stream()
                 .map(ItemRequestMapper::toItemRequestDto)
                 .collect(Collectors.toList());
