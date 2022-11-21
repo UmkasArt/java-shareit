@@ -45,7 +45,7 @@ public class ItemControllerWithMockMvcTests {
 
     @Test
     void getAllTest() throws Exception {
-        when(itemService.getItems(anyLong()))
+        when(itemService.getItems(anyLong(), anyInt(), anyInt()))
                 .thenReturn(List.of(itemDto));
         mvc.perform(get("/items")
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -99,7 +99,7 @@ public class ItemControllerWithMockMvcTests {
 
     @Test
     void searchTest() throws Exception {
-        when(itemService.getSearchedItems(anyString()))
+        when(itemService.getSearchedItems(anyString(), anyInt(), anyInt()))
                 .thenReturn(List.of(itemDto));
         mvc.perform(get("/items/search?text='name'")
                         .characterEncoding(StandardCharsets.UTF_8)

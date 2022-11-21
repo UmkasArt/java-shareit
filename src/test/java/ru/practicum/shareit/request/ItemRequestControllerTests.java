@@ -54,12 +54,12 @@ public class ItemRequestControllerTests {
     void getAllItemRequestByUserTest() {
         User userTest = userController.saveNewUser(user);
         ItemRequestDto itemRequest = itemRequestController.create(userTest.getId(), itemRequestDto);
-        assertEquals(1, itemRequestController.getAllByUser(userTest.getId()).size());
+        assertEquals(1, itemRequestController.getAllByUser(userTest.getId(), 0, 10).size());
     }
 
     @Test
     void getAllByUserWithWrongUserTest() {
-        assertThrows(NoSuchElementException.class, () -> itemRequestController.getAllByUser(1L));
+        assertThrows(NoSuchElementException.class, () -> itemRequestController.getAllByUser(1L, 0, 10));
     }
 
     @Test

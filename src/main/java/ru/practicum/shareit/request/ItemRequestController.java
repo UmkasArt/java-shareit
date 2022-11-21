@@ -25,21 +25,16 @@ public class ItemRequestController {
     }
 
     @GetMapping
-    public List<ItemRequestDto> getAllByUser(@RequestHeader("X-Sharer-User-Id") Long userId) {
-        return itemRequestService.getAllByUser(userId);
+    public List<ItemRequestDto> getAllByUser(@RequestHeader("X-Sharer-User-Id") Long userId,
+                                             @RequestParam(defaultValue = "0") int from,
+                                             @RequestParam(defaultValue = "10") int size) {
+        return itemRequestService.getAllByUser(userId, from, size);
     }
 
     @GetMapping("/all")
     public List<ItemRequestDto> getAll(@RequestParam(defaultValue = "0") int from,
                                        @RequestParam(defaultValue = "10") int size,
                                        @RequestHeader("X-Sharer-User-Id") Long userId) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти запросы - " +
-                    "некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти запросы - " +
-                    "некорректно переданы параметры поиска");
-        }
         return itemRequestService.getAll(from, size, userId);
     }
 

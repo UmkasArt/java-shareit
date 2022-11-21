@@ -69,7 +69,7 @@ public class BookingControllerTests {
 
     @Test
     void createBookingByWrongUserTest() {
-        assertThrows(NoSuchElementException.class, () -> bookingController.add(1L, bookingShortDto));
+        final NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> bookingController.add(1L, bookingShortDto));
     }
 
     @Test

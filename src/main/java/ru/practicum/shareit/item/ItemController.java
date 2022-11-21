@@ -36,14 +36,18 @@ public class ItemController {
     }
 
     @GetMapping
-    public List<ItemDto> getUsersItems(@RequestHeader("X-Sharer-User-Id") Long userId) {
-        return itemService.getItems(userId);
+    public List<ItemDto> getUsersItems(@RequestHeader("X-Sharer-User-Id") Long userId,
+                                       @RequestParam(defaultValue = "0") int from,
+                                       @RequestParam(defaultValue = "10") int size) {
+        return itemService.getItems(userId, from, size);
     }
 
     @GetMapping("/search")
     public List<ItemDto> getSearchedItems(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                          @RequestParam String text) {
-        return itemService.getSearchedItems(text);
+                                          @RequestParam String text,
+                                          @RequestParam(defaultValue = "0") int from,
+                                          @RequestParam(defaultValue = "10") int size) {
+        return itemService.getSearchedItems(text, from, size);
     }
 
     @DeleteMapping("/{itemId}")

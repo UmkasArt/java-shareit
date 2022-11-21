@@ -28,7 +28,7 @@ public class ItemRequestRepositoryTests {
     void findAllByRequestorIdOrderByCreatedAscTest() {
         User user = userRepository.save(new User(1L, "name", "email@email.com"));
         itemRequestRepository.save(new ItemRequest(1L, "description", user, LocalDateTime.now()));
-        List<ItemRequest> items = itemRequestRepository.findAllByRequestorIdOrderByCreatedAsc(user.getId());
+        List<ItemRequest> items = itemRequestRepository.findAllByRequestorIdOrderByCreatedAsc(user.getId(), Pageable.ofSize(10));
         assertThat(items.size(), equalTo(1));
     }
 

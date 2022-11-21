@@ -39,11 +39,6 @@ public class BookingController {
                                          @RequestParam(defaultValue = "ALL") String state,
                                          @RequestParam(defaultValue = "0") int from,
                                          @RequestParam(defaultValue = "10") int size) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
-        }
         return bookingService.findAllByUser(userId, state, from, size);//
     }
 
@@ -52,11 +47,7 @@ public class BookingController {
                                            @RequestParam(defaultValue = "ALL") String state,
                                            @RequestParam(defaultValue = "0") int from,
                                            @RequestParam(defaultValue = "10") int size) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
-        }
+
         return bookingService.findAllByOwner(userId, state, from, size);//
     }
 }

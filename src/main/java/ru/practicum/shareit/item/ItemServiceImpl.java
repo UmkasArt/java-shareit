@@ -1,6 +1,7 @@
 package ru.practicum.shareit.item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.BookingMapper;
 import ru.practicum.shareit.booking.BookingRepository;
@@ -71,18 +72,30 @@ class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> getSearchedItems(String text) {
+    public List<ItemDto> getSearchedItems(String text, Integer from, Integer size) {
+        if (from < 0) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        } else if (size < 1) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        }
         if (text.isBlank() || text.isEmpty()) {
             return new ArrayList<>();
         }
-        return itemRepository.searchItems(text).stream()
+        PageRequest pageRequest = PageRequest.of(from / size, size);
+        return itemRepository.searchItems(text, pageRequest).stream()
                 .map(ItemMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<ItemDto> getItems(Long userId) {
-        return itemRepository.findItemsByOwnerId(userId).stream()
+    public List<ItemDto> getItems(Long userId, Integer from, Integer size) {
+        if (from < 0) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        } else if (size < 1) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        }
+        PageRequest pageRequest = PageRequest.of(from / size, size);
+        return itemRepository.findItemsByOwnerId(userId, pageRequest).stream()
                 .map(ItemMapper::toDto)
                 .map(i -> setBookings(i, userId))
                 .map(this::addCommentsToItem)

@@ -105,23 +105,23 @@ public class ItemControllerTests {
     void deleteItemTest() {
         userController.saveNewUser(user);
         itemController.add(1L, itemDto);
-        assertEquals(1, itemController.getUsersItems(1L).size());
+        assertEquals(1, itemController.getUsersItems(1L, 0, 10).size());
         itemController.deleteItem(1L, 1L);
-        assertEquals(0, itemController.getUsersItems(1L).size());
+        assertEquals(0, itemController.getUsersItems(1L, 0, 10).size());
     }
 
     @Test
     void searchItemTest() {
         userController.saveNewUser(user);
         itemController.add(1L, itemDto);
-        assertEquals(1, itemController.getSearchedItems(1L, "Desc").size());
+        assertEquals(1, itemController.getSearchedItems(1L, "Desc", 0, 10).size());
     }
 
     @Test
     void searchItemEmptyTextTest() {
         userController.saveNewUser(user);
         itemController.add(1L, itemDto);
-        assertEquals(new ArrayList<ItemDto>(), itemController.getSearchedItems(1L, ""));
+        assertEquals(new ArrayList<ItemDto>(), itemController.getSearchedItems(1L, "", 0, 10));
     }
 
     @Test
