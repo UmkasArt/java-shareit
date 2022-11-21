@@ -10,13 +10,13 @@ interface ItemService {
 
     ItemDto updateItem(Long userId, ItemDto itemDto, Long itemId);
 
-    List<ItemDto> getItems(Long userId);
+    List<ItemDto> getItems(Long userId, Integer from, Integer size);
 
     void deleteItem(Long userId, Long itemId);
 
     ItemDto getItem(Long userId, Long itemId);
 
-    List<ItemDto> getSearchedItems(String text);
+    List<ItemDto> getSearchedItems(String text, Integer from, Integer size);
 
     CommentDto addComment(Long userId, Long itemId, CommentDto commentDto);
 }

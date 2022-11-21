@@ -1,6 +1,7 @@
 package ru.practicum.shareit.item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.BookingMapper;
 import ru.practicum.shareit.booking.BookingRepository;
@@ -13,6 +14,7 @@ import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.UserRepository;
 import ru.practicum.shareit.user.model.User;
 
+import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -70,24 +72,37 @@ class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> getSearchedItems(String text) {
+    public List<ItemDto> getSearchedItems(String text, Integer from, Integer size) {
+        if (from < 0) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        } else if (size < 1) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        }
         if (text.isBlank() || text.isEmpty()) {
             return new ArrayList<>();
         }
-        return itemRepository.searchItems(text).stream()
+        PageRequest pageRequest = PageRequest.of(from / size, size);
+        return itemRepository.searchItems(text, pageRequest).stream()
                 .map(ItemMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<ItemDto> getItems(Long userId) {
-        return itemRepository.findItemsByOwnerId(userId).stream()
+    public List<ItemDto> getItems(Long userId, Integer from, Integer size) {
+        if (from < 0) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        } else if (size < 1) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        }
+        PageRequest pageRequest = PageRequest.of(from / size, size);
+        return itemRepository.findItemsByOwnerId(userId, pageRequest).stream()
                 .map(ItemMapper::toDto)
                 .map(i -> setBookings(i, userId))
                 .map(this::addCommentsToItem)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public void deleteItem(Long userId, Long itemId) {
         itemRepository.deleteByIdAndOwnerId(itemId, userId);
@@ -98,9 +113,9 @@ class ItemServiceImpl implements ItemService {
         User user = userRepository.findById(userId).orElseThrow();
         Item item = itemRepository.findById(itemId).orElseThrow();
         List<Booking> bookings = bookingRepository
-                .findAllByItemIdAndBooker_IdAndStatusAndEndIsBefore(itemId, userId, BookingStatus.APPROVED,LocalDateTime.now());
+                .findAllByItemIdAndBooker_IdAndStatusAndEndIsBefore(itemId, userId, BookingStatus.APPROVED, LocalDateTime.now());
         if (bookings.isEmpty())
-            throw new ValidationException("Item не забронирован этим пользователем");
+            throw new ValidationException("Item не забронирован этим пользователем или аренда вещи еще не завершена");
         Comment comment = CommentMapper.toModel(commentDto);
         comment.setAuthor(user);
         comment.setItem(item);
