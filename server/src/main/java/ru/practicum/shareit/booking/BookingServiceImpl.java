@@ -172,5 +172,4 @@ public class BookingServiceImpl implements BookingService {
         bookingDto.setItem(item);
         return bookingDto;
     }
-
 }

@@ -19,5 +19,4 @@ public class CommentMapper {
                 commentDto.getText()
         );
     }
-
 }

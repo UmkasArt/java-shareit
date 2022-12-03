@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import static ru.practicum.shareit.request.ItemRequestMapper.toItemRequest;
 import static ru.practicum.shareit.request.ItemRequestMapper.toItemRequestDto;
 
-
 @Service
 @RequiredArgsConstructor
 public class ItemRequestServiceImpl implements ItemRequestService {
