@@ -36,10 +36,10 @@ public class ItemRequestRepositoryTests {
     void findAllByRequestorNotLikeOrderByCreatedAscTest() {
         User user = userRepository.save(new User(1L, "name", "email@email.com"));
         itemRequestRepository.save(new ItemRequest(1L, "description", user, LocalDateTime.now()));
-        assertThat(itemRequestRepository.findAllByRequestorNotLikeOrderByCreatedAsc(user, Pageable.ofSize(10))
+        assertThat(itemRequestRepository.findAllByRequestorIsNotOrderByCreatedAsc(user, Pageable.ofSize(10))
                 .stream().count(), equalTo(0L));
         User user2 = userRepository.save(new User(2L, "name2", "email2@email.com"));
-        assertThat(itemRequestRepository.findAllByRequestorNotLikeOrderByCreatedAsc(user2, Pageable.ofSize(10))
+        assertThat(itemRequestRepository.findAllByRequestorIsNotOrderByCreatedAsc(user2, Pageable.ofSize(10))
                 .stream().count(), equalTo(1L));
     }
 }
