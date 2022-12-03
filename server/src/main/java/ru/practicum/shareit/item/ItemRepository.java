@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    List<Item> findItemsByOwnerId(Long ownerId, Pageable pageable);
+    List<Item> findItemsByOwnerIdOrderByIdAsc(Long ownerId, Pageable pageable);
 
     Item findItemById(Long id);
 

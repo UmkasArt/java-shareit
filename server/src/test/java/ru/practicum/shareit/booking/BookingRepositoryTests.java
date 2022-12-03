@@ -75,7 +75,7 @@ public class BookingRepositoryTests {
         userRepository.save(user2);
         booking.setStatus(APPROVED);
         bookingRepository.save(booking);
-        assertThat(bookingRepository.findAllByItemIdAndBooker_IdAndStatusAndEndIsBefore(item.getId(),
+        assertThat(bookingRepository.findAllByItemIdAndBooker_IdAndStatusEqualsAndEndIsBefore(item.getId(),
                         user2.getId(), APPROVED, LocalDateTime.of(2023, 3, 10, 10, 10)).size(),
                 equalTo(1));
     }

@@ -114,14 +114,14 @@ public class ItemControllerTests {
     void searchItemTest() {
         userController.saveNewUser(user);
         itemController.add(1L, itemDto);
-        assertEquals(1, itemController.getSearchedItems(1L, "Desc", 0, 10).size());
+        assertEquals(1, itemController.getSearchedItems("Desc", 0, 10).size());
     }
 
     @Test
     void searchItemEmptyTextTest() {
         userController.saveNewUser(user);
         itemController.add(1L, itemDto);
-        assertEquals(new ArrayList<ItemDto>(), itemController.getSearchedItems(1L, "", 0, 10));
+        assertEquals(new ArrayList<ItemDto>(), itemController.getSearchedItems("", 0, 10));
     }
 
     @Test

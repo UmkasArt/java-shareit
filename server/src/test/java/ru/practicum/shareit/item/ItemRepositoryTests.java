@@ -46,7 +46,7 @@ public class ItemRepositoryTests {
     void findAllByOwnerIdTest() {
         User user = userRepository.save(new User(1L, "name", "user@email.com"));
         itemRepository.save(new Item(1L, "name", "description", true, 1L, 1L));
-        List<Item> items = itemRepository.findItemsByOwnerId(user.getId(), Pageable.ofSize(10));
+        List<Item> items = itemRepository.findItemsByOwnerIdOrderByIdAsc(user.getId(), Pageable.ofSize(10));
         assertThat(items.stream().count(), equalTo(1L));
     }
 

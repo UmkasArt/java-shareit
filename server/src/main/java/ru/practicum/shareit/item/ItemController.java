@@ -42,8 +42,7 @@ public class ItemController {
     }
 
     @GetMapping("/search")
-    public List<ItemDto> getSearchedItems(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                          @RequestParam String text,
+    public List<ItemDto> getSearchedItems(@RequestParam String text,
                                           @RequestParam(defaultValue = "0") int from,
                                           @RequestParam(defaultValue = "10") int size) {
         return itemService.getSearchedItems(text, from, size);

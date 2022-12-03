@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.BookingMapper;
 import ru.practicum.shareit.booking.BookingRepository;
 import ru.practicum.shareit.booking.model.Booking;
-import ru.practicum.shareit.booking.model.BookingStatus;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Comment;
@@ -22,6 +21,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+
+import static ru.practicum.shareit.booking.model.BookingStatus.APPROVED;
+import static ru.practicum.shareit.booking.model.BookingStatus.REJECTED;
 
 @Service
 @RequiredArgsConstructor
@@ -95,7 +97,7 @@ class ItemServiceImpl implements ItemService {
             throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
         }
         PageRequest pageRequest = PageRequest.of(from / size, size);
-        return itemRepository.findItemsByOwnerId(userId, pageRequest).stream()
+        return itemRepository.findItemsByOwnerIdOrderByIdAsc(userId, pageRequest).stream()
                 .map(ItemMapper::toDto)
                 .map(i -> setBookings(i, userId))
                 .map(this::addCommentsToItem)
@@ -113,9 +115,10 @@ class ItemServiceImpl implements ItemService {
         User user = userRepository.findById(userId).orElseThrow();
         Item item = itemRepository.findById(itemId).orElseThrow();
         List<Booking> bookings = bookingRepository
-                .findAllByItemIdAndBooker_IdAndStatusAndEndIsBefore(itemId, userId, BookingStatus.APPROVED, LocalDateTime.now());
-        if (bookings.isEmpty())
+                .findAllByItemIdAndBooker_IdAndStatusEqualsAndEndIsBefore(itemId, userId, APPROVED, LocalDateTime.now());
+        if (bookings.isEmpty()) {
             throw new ValidationException("Item не забронирован этим пользователем или аренда вещи еще не завершена");
+        }
         Comment comment = CommentMapper.toModel(commentDto);
         comment.setAuthor(user);
         comment.setItem(item);
@@ -124,7 +127,7 @@ class ItemServiceImpl implements ItemService {
 
     private ItemDto setBookings(ItemDto itemDto, long bookerId) {
         Comparator<Booking> comparator = (b1, b2) -> b1.getStart().isBefore(b2.getStart()) ? -1 : b1.getStart().isAfter(b2.getStart()) ? 1 : 0;
-        List<Booking> bookings = bookingRepository.findAllByItemIdAndBooker_IdNotAndStatusNot(itemDto.getId(), bookerId, BookingStatus.REJECTED);
+        List<Booking> bookings = bookingRepository.findAllByItemIdAndBooker_IdNotAndStatusNot(itemDto.getId(), bookerId, REJECTED);
         bookings.sort(comparator);
         for (Booking booking : bookings) {
             itemDto.setNextBooking(BookingMapper.toDtoWithId(booking));

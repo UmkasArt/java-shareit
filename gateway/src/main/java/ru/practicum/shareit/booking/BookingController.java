@@ -23,35 +23,35 @@ public class BookingController {
     private final BookingClient bookingClient;
 
     @GetMapping
-    public ResponseEntity<Object> getBookings(@RequestHeader("X-Sharer-User-Id") long userId,
-                                              @RequestParam(name = "state", defaultValue = "all") String stateParam,
-                                              @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
-                                              @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
+    public ResponseEntity<Object> getBookings(@RequestHeader("X-Sharer-User-Id") Long userId,
+                                              @RequestParam(name = "state", defaultValue = "ALL") String stateParam,
+                                              @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") int from,
+                                              @Positive @RequestParam(name = "size", defaultValue = "10") int size) {
         BookingState state = BookingState.from(stateParam)
                 .orElseThrow(() -> new IllegalArgumentException("Unknown state: " + stateParam));
         return bookingClient.getBookings(userId, state, from, size);
     }
 
     @GetMapping("/owner")
-    public ResponseEntity<Object> getBookingCurrentOwner(@RequestHeader("X-Sharer-User-Id") long userId,
-                                                         @RequestParam(name = "state", defaultValue = "all") String stateParam,
+    public ResponseEntity<Object> getBookingCurrentOwner(@RequestHeader("X-Sharer-User-Id") Long userId,
+                                                         @RequestParam(name = "state", defaultValue = "ALL") String stateParam,
                                                          @PositiveOrZero @RequestParam(name = "from", defaultValue = "0")
-                                                         Integer from,
+                                                         int from,
                                                          @Positive @RequestParam(name = "size", defaultValue = "10")
-                                                         Integer size) {
+                                                         int size) {
         BookingState state = BookingState.from(stateParam)
                 .orElseThrow(() -> new IllegalArgumentException("Unknown state: " + stateParam));
         return bookingClient.getBookingCurrentOwner(userId, state, from, size);
     }
 
     @PostMapping
-    public ResponseEntity<Object> bookItem(@RequestHeader("X-Sharer-User-Id") long userId,
+    public ResponseEntity<Object> bookItem(@RequestHeader("X-Sharer-User-Id") Long userId,
                                            @RequestBody @Valid BookItemRequestDto requestDto) {
         return bookingClient.bookItem(userId, requestDto);
     }
 
     @GetMapping("/{bookingId}")
-    public ResponseEntity<Object> getBooking(@RequestHeader("X-Sharer-User-Id") long userId,
+    public ResponseEntity<Object> getBooking(@RequestHeader("X-Sharer-User-Id") Long userId,
                                              @PathVariable Long bookingId) {
         return bookingClient.getBooking(userId, bookingId);
     }

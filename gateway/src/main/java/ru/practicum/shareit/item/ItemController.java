@@ -21,8 +21,8 @@ public class ItemController {
 
     @GetMapping
     public ResponseEntity<Object> getItems(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                           @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
-                                           @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
+                                           @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") int from,
+                                           @Positive @RequestParam(name = "size", defaultValue = "10") int size) {
         return itemClient.getItems(userId, from, size);
     }
 
