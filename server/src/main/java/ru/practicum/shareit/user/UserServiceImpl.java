@@ -7,7 +7,6 @@ import ru.practicum.shareit.user.model.User;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,13 +39,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(UserDto userDto, Long userId) {
-        Optional<User> user = repository.findById(userId);
+        User user = repository.findById(userId).orElseThrow(() -> new NoSuchElementException("Не найден пользователь"));
         if (userDto.getName() != null) {
-            user.get().setName(userDto.getName());
+            user.setName(userDto.getName());
         }
         if (userDto.getEmail() != null) {
-            user.get().setEmail(userDto.getEmail());
+            user.setEmail(userDto.getEmail());
         }
-        return repository.save(user.get());
+        return repository.save(user);
     }
 }

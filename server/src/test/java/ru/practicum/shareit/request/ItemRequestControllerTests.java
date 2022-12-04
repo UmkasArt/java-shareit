@@ -9,7 +9,6 @@ import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.user.UserController;
 import ru.practicum.shareit.user.model.User;
 
-import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -78,7 +77,7 @@ public class ItemRequestControllerTests {
 
     @Test
     void getAllWithWrongFrom() {
-        assertThrows(ValidationException.class, () -> itemRequestController.getAll(-1, 10, 1L));
+        assertThrows(NoSuchElementException.class, () -> itemRequestController.getAll(-1, 10, 1L));
     }
 
 }

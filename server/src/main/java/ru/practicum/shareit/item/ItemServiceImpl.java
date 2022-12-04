@@ -75,11 +75,6 @@ class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getSearchedItems(String text, Integer from, Integer size) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
-        }
         if (text.isBlank() || text.isEmpty()) {
             return new ArrayList<>();
         }
@@ -91,11 +86,6 @@ class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getItems(Long userId, Integer from, Integer size) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
-        }
         PageRequest pageRequest = PageRequest.of(from / size, size);
         return itemRepository.findItemsByOwnerIdOrderByIdAsc(userId, pageRequest).stream()
                 .map(ItemMapper::toDto)

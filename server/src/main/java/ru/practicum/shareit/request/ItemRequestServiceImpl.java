@@ -10,7 +10,6 @@ import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.UserRepository;
 import ru.practicum.shareit.user.model.User;
 
-import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -42,14 +41,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
 
     @Override
     public List<ItemRequestDto> getAllByUser(Long userId, Integer from, Integer size) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти запросы - " +
-                    "некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти запросы - " +
-                    "некорректно переданы параметры поиска");
-        }
-        User user = userRepository.findById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("Невозможно найти запросы пользователя - " +
                         "не найден пользователь с id " + userId));
         List<ItemRequestDto> itemRequestDtos = itemRequestRepository.findAllByRequestorIdOrderByCreatedAsc(userId, PageRequest.of(from / size, size))
@@ -57,19 +49,11 @@ public class ItemRequestServiceImpl implements ItemRequestService {
                 .map(ItemRequestMapper::toItemRequestDto)
                 .collect(Collectors.toList());
         itemRequestDtos.forEach(this::setItemsToItemRequestDto);
-
         return itemRequestDtos;
     }
 
     @Override
     public List<ItemRequestDto> getAll(int from, int size, Long userId) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти запросы - " +
-                    "некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти запросы - " +
-                    "некорректно переданы параметры поиска");
-        }
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("Невозможно найти запросы - " +
                         "не найден пользователь с id " + userId));
@@ -84,7 +68,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
 
     @Override
     public ItemRequestDto getById(Long requestId, Long userId) {
-        User user = userRepository.findById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("Невозможно найти запрос - " +
                         "не найден пользователь с id " + userId));
         ItemRequest itemRequest = itemRequestRepository.findById(requestId)

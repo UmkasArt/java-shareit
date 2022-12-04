@@ -11,6 +11,7 @@ import ru.practicum.shareit.client.BaseClient;
 import ru.practicum.shareit.item.dto.CommentRequestDto;
 import ru.practicum.shareit.item.dto.ItemRequestDto;
 
+import javax.validation.ValidationException;
 import java.util.Map;
 
 @Service
@@ -27,6 +28,11 @@ public class ItemClient extends BaseClient {
     }
 
     public ResponseEntity<Object> getItems(long userId, Integer from, Integer size) {
+        if (from < 0) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        } else if (size < 1) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        }
         Map<String, Object> parameters = Map.of(
                 "from", from,
                 "size", size
@@ -51,6 +57,11 @@ public class ItemClient extends BaseClient {
     }
 
     public ResponseEntity<Object> searchItem(String text, Integer from, Integer size) {
+        if (from < 0) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        } else if (size < 1) {
+            throw new ValidationException("Невозможно найти Item - некорректно переданы параметры поиска");
+        }
         Map<String, Object> parameters = Map.of(
                 "text", text,
                 "from", from,
