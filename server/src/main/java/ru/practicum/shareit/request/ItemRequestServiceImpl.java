@@ -5,12 +5,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.item.ItemMapper;
 import ru.practicum.shareit.item.ItemRepository;
+import ru.practicum.shareit.item.dto.ItemShortDto;
+import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.UserRepository;
 import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -48,7 +51,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
                 .stream()
                 .map(ItemRequestMapper::toItemRequestDto)
                 .collect(Collectors.toList());
-        itemRequestDtos.forEach(this::setItemsToItemRequestDto);
+        setItemsToItemRequestDtos(itemRequestDtos);
         return itemRequestDtos;
     }
 
@@ -62,7 +65,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
                 .stream()
                 .map(ItemRequestMapper::toItemRequestDto)
                 .collect(Collectors.toList());
-        itemRequestDtos.forEach(this::setItemsToItemRequestDto);
+        setItemsToItemRequestDtos(itemRequestDtos);
         return itemRequestDtos;
     }
 
@@ -84,5 +87,16 @@ public class ItemRequestServiceImpl implements ItemRequestService {
                 .stream()
                 .map(ItemMapper::toItemShortDto)
                 .collect(Collectors.toList()));
+    }
+
+    private void setItemsToItemRequestDtos(List<ItemRequestDto> itemRequestDtos) {
+        List<Long> listOfItemRequestDtosIds = itemRequestDtos.stream().map(ItemRequestDto::getId).collect(Collectors.toList());
+
+        List<Item> itemsList = itemRepository.findAllByRequestIdIn(listOfItemRequestDtosIds);
+
+        itemRequestDtos.forEach(itemRequestDto -> {
+            List<ItemShortDto> itemShortDtoList = itemsList.stream().filter(item -> item.getRequestId().equals(itemRequestDto.getId())).map(ItemMapper::toItemShortDto).collect(Collectors.toList());
+            itemRequestDto.setItems(itemShortDtoList);
+        });
     }
 }

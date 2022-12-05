@@ -77,11 +77,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<BookingDto> findAllByUser(Long userId, String state, int from, int size) {
-        if (from < 0) {
-            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
-        } else if (size < 1) {
-            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
-        }
         User user = userRepository.findById(userId).orElseThrow();
         List<Booking> bookingDtoList = new ArrayList<>();
         PageRequest pageRequest = PageRequest.of(from / size, size);

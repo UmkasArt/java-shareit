@@ -11,6 +11,7 @@ import ru.practicum.shareit.booking.dto.BookItemRequestDto;
 import ru.practicum.shareit.booking.dto.BookingState;
 import ru.practicum.shareit.client.BaseClient;
 
+import javax.validation.ValidationException;
 import java.util.Map;
 
 @Service
@@ -27,6 +28,11 @@ public class BookingClient extends BaseClient {
     }
 
     public ResponseEntity<Object> getBookings(long userId, BookingState state, Integer from, Integer size) {
+        if (from < 0) {
+            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
+        } else if (size < 1) {
+            throw new ValidationException("Невозможно найти бронирования - некорректно переданы параметры поиска");
+        }
         Map<String, Object> parameters = Map.of(
                 "state", state.name(),
                 "from", from,
